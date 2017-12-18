@@ -1,0 +1,35 @@
+body {
+    background-image: url("../images/background.png");
+    font-family: 'Bungee', cursive;
+
+}
+
+.display-4 {
+    font-family: 'Bungee', cursive;
+}
+
+.container {
+    animation: color-change 50s;
+
+}
+
+@keyframes color-change {
+    0% {
+        background-color: teal;
+    }
+    20% {
+        background-color: gold;
+    }
+    40% {
+        background-color: indianred;
+    }
+    60% {
+        background-color: violet;
+    }
+    80% {
+        background-color: green;
+    }
+    100% {
+        background-color: teal;
+    }
+}
