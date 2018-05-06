@@ -3,45 +3,45 @@ var countStartNumber = 30;
 
 // Question set
 var questions = [{
-    question: "What was the first full length CGI movie?",
-    answers: ["A Bug's Life", "Monsters Inc.", "Toy Story", "The Lion King"],
-    correctAnswer: "Toy Story",
-    image: "assets/images/toystory.gif"
+    question: "Which thunderstorm lifecycle stage is mostly characterized by downdrafts?",
+    answers: ["Cumulus", "Disappating", "Mature",],
+    correctAnswer: "Disappating",
+    image: "assets/images/dissipating.jpeg"
 }, {
-    question: "Which of these is NOT a name of one of the Spice Girls?",
-    answers: ["Sporty Spice", "Fred Spice", "Scary Spice", "Posh Spice"],
-    correctAnswer: "Fred Spice",
-    image: "assets/images/spicegirls.gif"
+    question: "An aircraft announces, “left downwind for runway one six”. This means that the aircraft is on a heading of:",
+    answers: ["80 degrees", "160 degrees", "340 degrees",],
+    correctAnswer: "340 degrees",
+    image: "assets/images/runway16.jpeg"
 }, {
-    question: "Which NBA team won the most titles in the 90s?",
-    answers: ["New York Knicks", "Portland Trailblazers", "Los Angeles Lakers", "Chicago Bulls"],
-    correctAnswer: "Chicago Bulls",
-    image: "assets/images/bulls.gif"
+    question: "While monitoring the Cooperstown CTAF you hear an aircraft announce that they are midfield left downwind to RWY 13. Where would the aircraft be relative to the runway?",
+    answers: ["The aircraft is East", "The aircraft is South", "The aircraft is West",],
+    correctAnswer: "The aircraft is East",
+    image: "assets/images/planerunway.jpeg"
 }, {
-    question: "Which group released the hit song, 'Smells Like Teen Spirit'?",
-    answers: ["Nirvana", "Backstreet Boys", "The Offspring", "No Doubt"],
-    correctAnswer: "Nirvana",
-    image: "assets/images/nirvanabark.gif"
+    question: "Which is true regarding the presence of alcohol within the human body?",
+    answers: ["A small amount of alcohol increases vision acuity", "Consuming an equal amount of water will increase the destruction of alcohol and alleviate a hangover", "Judgment and decision-making abilities can be adversely affected by even small amounts of alcohol"],
+    correctAnswer: "Judgment and decision-making abilities can be adversely affected by even small amounts of alcohol",
+    image: "assets/images/alchohol.jpeg"
 }, {
-    question: "Which popular Disney movie featured the song, \"Circle of Life\"?",
-    answers: ["Aladdin", "Hercules", "Mulan", "The Lion King"],
-    correctAnswer: "The Lion King",
-    image: "assets/images/lionking.gif"
+    question: "When using a small UA in a commercial operation, who is responsible for briefing the participants about emergency procedures?",
+    answers: ["The FAA inspector-in-charge", "The lead visual observer.", "The remote PIC"],
+    correctAnswer: "The remote PIC",
+    image: "assets/images/pic.jpg"
 }, {
-    question: "Finish this line from the Fresh Prince of Bel-Air theme song: \"I whistled for a cab and when it came near, the license plate said...\"",
-    answers: ["Dice", "Mirror", "Fresh", "Cab"],
-    correctAnswer: "Fresh",
-    image: "assets/images/fresh.gif"
+    question: "According to 14 CFR part 107, the responsibility to inspect the small UAS to ensure it is in a safe operating condition rests with the",
+    answers: ["Remote pilot-in-command", "Visual observer", "Owner of the small UAS",],
+    correctAnswer: "Remote pilot-in-command",
+    image: "assets/images/maintenence.jpg"
 }, {
-    question: "What was Doug's best friend's name?",
-    answers: ["Skeeter", "Mark", "Zach", "Cody"],
-    correctAnswer: "Skeeter",
-    image: "assets/images/skeeter.gif"
+    question: "Identify the hazardous attitude or characteristic a remote pilot displays while taking risks in order to impress others?",
+    answers: ["Impulsivity.", "Macho", "Invulnerability"],
+    correctAnswer: "Macho",
+    image: "assets/images/macho.jpeg"
 }, {
-    question: "What was the name of the principal at Bayside High in Saved By The Bell?",
-    answers: ["Mr.Zhou", "Mr.Driggers", "Mr.Belding", "Mr.Page"],
-    correctAnswer: "Mr.Belding",
-    image: "assets/images/belding.gif"
+    question: "Under what condition would a small UA not have to be registered before it is operated in the United States?",
+    answers: ["When the aircraft weighs less than .55 pounds on takeoff, including everything that is on-board or attached to the aircraft", "When the aircraft has a takeoff weight that is more than .55 pounds, but less than 55 pounds, not including fuel and necessary attachments", "All small UAS need to be registered regardless of the weight of the aircraft before, during, or after the flight"],
+    correctAnswer: "When the aircraft weighs less than .55 pounds on takeoff, including everything that is on-board or attached to the aircraft",
+    image: "assets/images/register.jpg"
 }];
 
 // Variable to hold our setInterval
@@ -55,18 +55,18 @@ var game = {
     correct: 0,
     incorrect: 0,
 
-    countdown: function() {
+    timer: function() {
         game.counter--;
         $("#counter-number").text(game.counter);
         if (game.counter === 0) {
-            console.log("TIME UP");
+            console.log("TIMER HAS EXPIRED");
             game.timeUp();
         }
     },
 
-    loadQuestion: function() {
+    userQuestion: function() {
 
-        timer = setInterval(game.countdown, 1000);
+        timer = setInterval(game.timer, 1000);
 
         panel.html("<h2>" + questions[this.currentQuestion].question + "</h2>");
 
@@ -80,7 +80,7 @@ var game = {
         game.counter = countStartNumber;
         $("#counter-number").text(game.counter);
         game.currentQuestion++;
-        game.loadQuestion();
+        game.userQuestion();
     },
 
     timeUp: function() {
@@ -165,7 +165,7 @@ var game = {
         this.counter = countStartNumber;
         this.correct = 0;
         this.incorrect = 0;
-        this.loadQuestion();
+        this.userQuestion();
     }
 };
 
@@ -180,6 +180,6 @@ $(document).on("click", ".answer-button", function(e) {
 });
 
 $(document).on("click", "#start", function() {
-    $("#sub-wrapper").prepend("<h2>Time Remaining: <span id='counter-number'>30</span> Seconds</h2>");
-    game.loadQuestion();
+    $("#sub-wrapper").append("<h2 id='answer-timer'><span id='counter-number'>30</span> Seconds</h2>");
+    game.userQuestion();
 });
